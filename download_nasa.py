@@ -18,7 +18,7 @@ for link in soup.find_all('a'):
         # 获取包含图片的网页
         image_page_url = 'https://apod.nasa.gov/apod/' + href
         try:
-            image_page_response = requests.get(image_page_url)
+            image_page_response = requests.get(image_page_url, timeout=60)
             image_page_soup = BeautifulSoup(image_page_response.text, 'html.parser')
         except Exception as e:
             print(f'获取网页失败，错误信息：{e}')
@@ -41,7 +41,7 @@ for link in soup.find_all('a'):
 
         # 下载图片
         try:
-            image_response = requests.get(image_url)
+            image_response = requests.get(image_url, timeout=60)
             image_content = image_response.content
         except Exception as e:
             print(f'下载图片失败，错误信息：{e}')
